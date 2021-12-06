@@ -11,6 +11,7 @@ const Home = () => {
       <p>Email: {user.email}</p>
       <p>Phone: {user.phone_number}</p>
       <p>Username: {user.username}</p>
+      <p>PtNum: {user['custom:ptnum']}</p>
       <Link to="/app/home">Home</Link>
     </div>
   )
