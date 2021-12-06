@@ -88,7 +88,7 @@ class SignUp extends React.Component {
                <input
                 onChange={this.handleUpdate}
                 placeholder='PtNum'
-                name='PtNum'
+                name='ptnum'
                 value={this.state.ptnum}
                 style={styles.input}
               />
