@@ -12,7 +12,7 @@ const initialState = {
   authCode: '',
   stage: 0,
   error: '',
-  ptnum: ''
+  birthdate: ''
 }
 
 
@@ -26,9 +26,9 @@ class SignUp extends React.Component {
   }
 
   signUp = async() => {
-    const { username, password, email, phone_number, ptnum } = this.state
+    const { username, password, email, phone_number, birthdate } = this.state
     try {
-      await Auth.signUp({ username, password, attributes: { email, phone_number, 'custom:ptnum':ptnum }})
+      await Auth.signUp({ username, password, attributes: { email, phone_number, birthdate }})
       this.setState({ stage: 1 })
     } catch (err) {
       this.setState({ error: err })
@@ -87,9 +87,9 @@ class SignUp extends React.Component {
               />
                <input
                 onChange={this.handleUpdate}
-                placeholder='PtNum'
-                name='ptnum'
-                value={this.state.ptnum}
+                placeholder='Birthdate'
+                name='birthdate'
+                value={this.state.birthdate}
                 style={styles.input}
               />
               <div style={styles.button} onClick={this.signUp}>
@@ -98,6 +98,7 @@ class SignUp extends React.Component {
             </div>
           )
         }
+        
         {
           this.state.stage === 1 && (
             <div style={styles.formContainer}>
