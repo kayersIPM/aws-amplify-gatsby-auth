@@ -4,7 +4,8 @@ import { navigate } from '@reach/router'
 import { setUser, isLoggedIn } from '../utils/auth'
 import Error from './Error'
 import { Auth } from 'aws-amplify'
-
+import config from '../aws-exports'
+Auth.configure(config)
 class Login extends React.Component {
   state = {
     username: ``,
