@@ -25,6 +25,11 @@ class Login extends React.Component {
       [event.target.name]: event.target.value,
     })
   }
+  handleUpdate2 = (date) => {
+    this.setState({
+      birthdate: date,
+    })
+  }
 
   login = async() => {
     const { username, password, birthdate } = this.state
@@ -68,7 +73,7 @@ class Login extends React.Component {
           />
             <BirthdayPicker
             name='date'
-        onChange={this.handleUpdate}
+        onChange={this.handleUpdate2}
         placeHolders={["doy", "month", "yor"]}
         style={{ width: "200px" }}
       />
