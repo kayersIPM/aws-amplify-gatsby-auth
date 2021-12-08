@@ -27,7 +27,7 @@ class Login extends React.Component {
   }
   handleUpdate2 = (date) => {
     this.setState({
-      birthdate: date,
+      birthdate: moment(date).format('L'),
     })
   }
 
@@ -74,10 +74,10 @@ class Login extends React.Component {
             <BirthdayPicker
             name='date'
         onChange={this.handleUpdate2}
-        placeHolders={["doy", "month", "yor"]}
+        placeHolders={["MM", "DD", "YYYY"]}
         style={{ width: "200px" }}
       />
-      <h2>{moment(this.state.date, "MM/DD/YYYY").unix()}</h2>
+     
           <div style={styles.button} onClick={this.login}>
             <span style={styles.buttonText}>Sign In</span>
           </div>
