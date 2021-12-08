@@ -5,14 +5,21 @@ import { setUser, isLoggedIn } from '../utils/auth'
 import Error from './Error'
 import { Auth } from 'aws-amplify'
 import config from '../aws-exports'
+import { BirthdayPicker } from "react-birthday-picker";
+import moment from 'moment';
+
 Auth.configure(config)
 class Login extends React.Component {
   state = {
     username: ``,
     password: ``,
+    birthdate: ``,
     error: ``
   }
-
+  // const [date, setDate] = useState("");
+  // handleChange = (date) => {
+  //   if (date) setDate(date);
+  // };
   handleUpdate = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -20,13 +27,14 @@ class Login extends React.Component {
   }
 
   login = async() => {
-    const { username, password } = this.state
+    const { username, password, birthdate } = this.state
     try {
-      await Auth.signIn(username, password)
+      await Auth.signIn(username, password, {['birthdate'] : birthdate})
       const user = await Auth.currentAuthenticatedUser()
       const userInfo = {
         ...user.attributes,
-        username: user.username
+        username: user.username,
+        birthdate: user.birthdate
       }
       setUser(userInfo)
       navigate("/app/home")
@@ -58,11 +66,18 @@ class Login extends React.Component {
             type='password'
             style={styles.input}
           />
+            <BirthdayPicker
+            name='date'
+        onChange={this.handleUpdate}
+        placeHolders={["doy", "month", "yor"]}
+        style={{ width: "200px" }}
+      />
+      <h2>{moment(this.state.date, "MM/DD/YYYY").unix()}</h2>
           <div style={styles.button} onClick={this.login}>
             <span style={styles.buttonText}>Sign In</span>
           </div>
         </div>
-        <Link to="/app/signup">Sign Up</Link><br />
+        {/* <Link to="/app/signup">Sign Up</Link><br /> */}
       </div>
     )
   }

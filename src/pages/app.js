@@ -5,7 +5,9 @@ import Details from "../components/Details"
 import Home from "../components/Home"
 import Login from "../components/Login"
 import PrivateRoute from "../components/PrivateRoute"
-
+import Amplify from 'aws-amplify';
+import config from '../aws-exports'
+Amplify.configure({Auth: config})
 
 const App = () => (
   <Layout>
